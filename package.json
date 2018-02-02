@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "truffle compile && truffle deploy",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "truffle compile && truffle migrate",
+    "test": "truffle test"
   },
   "author": "",
   "license": "ISC",
