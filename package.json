@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+		"node": "truffle develop",
     "build": "truffle compile && truffle migrate",
     "test": "truffle test"
   },

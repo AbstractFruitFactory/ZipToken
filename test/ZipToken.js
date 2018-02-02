@@ -1,17 +1,16 @@
 var ZipToken = artifacts.require("./ZipToken.sol");
 
 contract('ZipToken', function (accounts) {
-  let zip;
-
-  async function redeploy() {
-    zip = await ZipToken.deployed();
-  }
-
-  beforeEach(redeploy);
-
+  
   it("should put 1000000000 (one billion) ZIP in the owner's account.", async function () {
-    let balance = await zip.balanceOf.call(accounts[0]);
-    assert.equal(balance.valueOf(), 1000000000*10**18, "One billion ZIP tokens wasn't in the owner's account.");
+    const owner = accounts[0];
+    const zip = await ZipToken.new({ from: owner });
+    const totalSupply = await zip.totalSupply();
+    assert(totalSupply.eq(1000000000*10**18));
+
+
+    //let balance = await zip.balanceOf.call(accounts[0]);
+    //assert.equal(balance.valueOf(), 1000000000*10**18, "One billion ZIP tokens wasn't in the owner's account.");
   });
 /*
   it("should call a function that depends on a linked library", async function () {
