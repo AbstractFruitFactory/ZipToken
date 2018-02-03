@@ -7,17 +7,9 @@ contract('ZipToken', function (accounts) {
     const zip = await ZipToken.new({ from: owner });
     const totalSupply = await zip.totalSupply();
     assert(totalSupply.eq(1000000000*10**18));
-
-
-    //let balance = await zip.balanceOf.call(accounts[0]);
-    //assert.equal(balance.valueOf(), 1000000000*10**18, "One billion ZIP tokens wasn't in the owner's account.");
   });
+  
 /*
-  it("should call a function that depends on a linked library", async function () {
-    let coinBalance = (await meta.getBalance.call(accounts[0])).toNumber();
-    let coinEthBalance = (await meta.getBalanceInEth.call(accounts[0])).toNumber();
-    assert.equal(coinEthBalance, 2 * coinBalance, "Library function returned unexpected function, linkage may be broken");
-  });
 
   it("should send coin correctly", async function () {
     // Get initial balances of first and second account.
