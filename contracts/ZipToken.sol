@@ -8,9 +8,22 @@ contract ZipToken is StandardToken, Ownable {
     uint8 public constant DECIMALS = 18;
     uint public constant TOTAL_TOKEN_AMOUNT = 1000000000;
     uint public constant INITIAL_SUPPLY = TOTAL_TOKEN_AMOUNT * 10**uint(DECIMALS);
+    bool public filled = false;
 
     function ZipToken() public {
         totalSupply_ = INITIAL_SUPPLY;
         balances[msg.sender] = INITIAL_SUPPLY;
+    }
+
+    function distributeTokens(address[] addresses, uint[] values) public onlyOwner {
+        require(addresses.length == values.length);
+        
+        for (uint i = 0; i < addresses.length; i++) {
+            address a = addresses[i];
+            uint v = values[i];
+            if (balances[a] == 0) {
+                balances[a] = v;
+            }
+        }
     }
 }
