@@ -17,12 +17,11 @@ contract ZipToken is StandardToken, Ownable {
 
     function distributeTokens(address[] addresses, uint[] values) public onlyOwner {
         require(addresses.length == values.length);
-        
         for (uint i = 0; i < addresses.length; i++) {
             address a = addresses[i];
             uint v = values[i];
-            if (balances[a] == 0) {
-                balances[a] = v;
+            if (balanceOf(a) == 0) {
+                increaseApproval(a, v);
             }
         }
     }
