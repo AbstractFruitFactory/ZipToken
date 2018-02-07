@@ -1,4 +1,4 @@
-/*
+
 import assertRevert from '../node_modules/zeppelin-solidity/test/helpers/assertRevert.js';
 
 var ZipToken = artifacts.require('ZipTokenMock');
@@ -98,4 +98,3 @@ contract('ZipTokenMock', function (accounts) {
   });
 });
 
-*/

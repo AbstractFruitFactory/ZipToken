@@ -1,6 +1,6 @@
 pragma solidity ^0.4.17;
-import '../node_modules/zeppelin-solidity/contracts/token/ERC20/StandardToken.sol';
-import '../node_modules/zeppelin-solidity/contracts/ownership/Ownable.sol';
+import 'zeppelin-solidity/contracts/token/ERC20/StandardToken.sol';
+import 'zeppelin-solidity/contracts/ownership/Ownable.sol';
     
 contract ZipToken is StandardToken, Ownable {
     string public constant NAME = "ZipperToken";
