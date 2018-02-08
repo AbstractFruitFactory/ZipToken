@@ -1,3 +1,6 @@
+import latestTime from 'zeppelin-solidity/test/helpers/latestTime';
+import { increaseTimeTo, duration } from 'zeppelin-solidity/test//helpers/increaseTime';
+
 var ZipToken = artifacts.require("./ZipToken.sol");
 var TokenVesting = artifacts.require("../node_modules/zeppelin-solidity/contracts/token/ERC20/TokenVesting.sol");
 
@@ -26,16 +29,18 @@ contract('ZipToken', function (accounts) {
 
   it("should vest tokens.", async function () {
     const owner = accounts[0];
-    var timestamp = Math.round((new Date()).getTime() / 1000);
+    var start = latestTime() + duration.seconds(1);
+    var cliff = duration.seconds(5);
+    var total_duration = duration.years(2);
     const zip = await ZipToken.new({ from: owner });
-    const vesting = await TokenVesting.new(owner, 0, 10, 60, false, { from: owner });
-    await zip.increaseApproval(vesting, 60, { from: owner });
-    await zip.transferFrom(owner, vesting, 60, { from: vesting });
-    assert.equal(vesting.vestedAmount(zip).toString(), '0');
-    setTimeout(function callback() {
-      assert(vesting.vestedAmount(zip) > 0);
+    const vesting = await TokenVesting.new(owner, start, cliff, total_duration, true, { from: owner });
+    await zip.increaseApproval(owner, 60, { from: owner });
+    await zip.transferFrom(owner, vesting.address, 60, { from: owner });
+    var vested_amount = await vesting.vestedAmount(zip.address);
+    assert.equal(vested_amount.toString(), '0');
+    setTimeout(async function callback() {
+      vested_amount = await vesting.vestedAmount(zip.address);
+      assert(vested_amount.toString() > 0);
     }, 10000);
-
   })
-
 });
