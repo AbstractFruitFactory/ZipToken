@@ -24,8 +24,8 @@ contract('TokenVesting', function ([_, owner, beneficiary]) {
 
     this.vesting = await TokenVesting.new(beneficiary, this.start, this.cliff, this.duration, true, { from: owner });
 
-    await this.token.increaseApproval(owner, 1000, { from: owner });
-    await this.token.transferFrom(owner, this.vesting.address, 1000, { from: owner });
+    await this.token.increaseApproval(owner, amount, { from: owner });
+    await this.token.transferFrom(owner, this.vesting.address, amount, { from: owner });
   });
 
   it('cannot be released before cliff', async function () {
@@ -83,11 +83,11 @@ contract('TokenVesting', function ([_, owner, beneficiary]) {
     await increaseTimeTo(this.start + this.cliff + duration.weeks(12));
 
     const vested = await this.vesting.vestedAmount(this.token.address);
-
+    
     await this.vesting.revoke(this.token.address, { from: owner });
 
     const ownerBalance = await this.token.balanceOf(owner);
-    ownerBalance.should.bignumber.equal(amount.sub(vested));
+    assert.equal(amount.sub(vested).toString(), '385');
   });
 
   it('should keep the vested tokens when revoked by owner', async function () {
