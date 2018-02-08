@@ -31,7 +31,7 @@ contract('ZipToken', function (accounts) {
     const owner = accounts[0];
     var start = latestTime() + duration.seconds(1);
     var cliff = duration.seconds(5);
-    var total_duration = duration.years(2);
+    var total_duration = duration.minutes(1);
     const zip = await ZipToken.new({ from: owner });
     const vesting = await TokenVesting.new(owner, start, cliff, total_duration, true, { from: owner });
     await zip.increaseApproval(owner, 60, { from: owner });
@@ -40,6 +40,7 @@ contract('ZipToken', function (accounts) {
     assert.equal(vested_amount.toString(), '0');
     setTimeout(async function callback() {
       vested_amount = await vesting.vestedAmount(zip.address);
+      console.log(vested_amount.toString())
       assert(vested_amount.toString() > 0);
     }, 10000);
   })

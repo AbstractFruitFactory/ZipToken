@@ -7,7 +7,7 @@ module.exports = function(deployer, network, accounts) {
   deployer.deploy(ZipTokenMock);
   var start = latestTime() + duration.seconds(1);
   var cliff = duration.seconds(5);
-  var total_duration = duration.years(2);
+  var total_duration = duration.minutes(1);
 
   deployer.deploy(Vesting, accounts[0], start, cliff, total_duration, true);
 };
