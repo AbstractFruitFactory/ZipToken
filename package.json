@@ -23,6 +23,7 @@
     "lodash": "^4.17.4",
     "chai": "^4.0.2",
     "chai-as-promised": "^7.0.0",
-    "chai-bignumber": "^2.0.0"
+    "chai-bignumber": "^2.0.0",
+    "ethjs-abi": "^0.2.1"
   }
 }
