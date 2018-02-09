@@ -19,8 +19,6 @@ contract('ZipToken', function (accounts) {
     var values = [10, 20];
     var addresses = [accounts[1], accounts[2]];
     await zip.distributeTokens(addresses, values, { from: owner });
-    await zip.transferFrom(owner, accounts[1], 10, { from: accounts[1] });
-    await zip.transferFrom(owner, accounts[2], 20, { from: accounts[2] });
     var balance1 = await zip.balanceOf(accounts[1]);
     var balance2 = await zip.balanceOf(accounts[2]);
     assert.equal(balance1.toString(), '10');

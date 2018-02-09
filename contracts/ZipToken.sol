@@ -4,7 +4,7 @@ import 'zeppelin-solidity/contracts/ownership/Ownable.sol';
     
 contract ZipToken is StandardToken, Ownable {
     string public constant NAME = "ZipperToken";
-    string public constant SYMBOL = "ZIP";
+    string public constant SYMBOL = "ZIPT";
     uint8 public constant DECIMALS = 18;
     uint public constant TOTAL_TOKEN_AMOUNT = 1000000000;
     uint public constant INITIAL_SUPPLY = TOTAL_TOKEN_AMOUNT * 10**uint(DECIMALS);
@@ -21,7 +21,7 @@ contract ZipToken is StandardToken, Ownable {
             address a = addresses[i];
             uint v = values[i];
             if (balanceOf(a) == 0) {
-                increaseApproval(a, v);
+                transfer(a, v);
             }
         }
     }
