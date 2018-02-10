@@ -10,9 +10,9 @@ require('chai')
   .should();
 
 const ZipToken = artifacts.require('ZipToken');
-const TokenVesting = artifacts.require('TokenVesting');
+const TokenVesting = artifacts.require('TokenVestingMock');
 
-contract('TokenVesting', function ([_, owner, beneficiary]) {
+contract('TokenVestingMock', function ([_, owner, beneficiary]) {
   const amount = new BigNumber(1000);
 
   beforeEach(async function () {
@@ -23,7 +23,11 @@ contract('TokenVesting', function ([_, owner, beneficiary]) {
     this.duration = duration.years(2);
 
     this.vesting = await TokenVesting.new(beneficiary, this.start, this.cliff, this.duration, true, { from: owner });
-
+    await this.vesting.setBeneficiary(beneficiary, { from: owner });
+    await this.vesting.setStart(this.start, { from: owner });
+    await this.vesting.setCliff(this.cliff, { from: owner });
+    await this.vesting.setDuration(this.duration, { from: owner });
+   
     await this.token.increaseApproval(owner, amount, { from: owner });
     await this.token.transferFrom(owner, this.vesting.address, amount, { from: owner });
   });
