@@ -1,7 +1,7 @@
 const Web3 = require('web3');
 const solc = require('solc');
 const fs = require('fs');
-var lineReader = require('line-reader');
+const lineReader = require('line-reader');
 
 const readline = require('readline');
 

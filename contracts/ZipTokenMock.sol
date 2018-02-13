@@ -13,4 +13,15 @@ contract ZipTokenMock is StandardToken, Ownable {
         totalSupply_ = INITIAL_SUPPLY;
         balances[msg.sender] = INITIAL_SUPPLY;
     }
+
+     function distributeTokens(address[] addresses, uint[] values) public onlyOwner {
+        require(addresses.length == values.length);
+        for (uint i = 0; i < addresses.length; i++) {
+            address a = addresses[i];
+            uint v = values[i];
+            if (balanceOf(a) == 0) {
+                transfer(a, v);
+            }
+        }
+    }
 }
