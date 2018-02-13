@@ -1,8 +1,7 @@
 pragma solidity ^0.4.17;
-import '../node_modules/zeppelin-solidity/contracts/token/ERC20/StandardToken.sol';
-import '../node_modules/zeppelin-solidity/contracts/ownership/Ownable.sol';
+import '../node_modules/zeppelin-solidity/contracts/token/ERC20/PausableToken.sol';
     
-contract ZipToken is StandardToken, Ownable {
+contract ZipToken is PausableToken {
     string public constant NAME = "ZipperToken";
     string public constant SYMBOL = "ZIPT";
     uint8 public constant DECIMALS = 18;
